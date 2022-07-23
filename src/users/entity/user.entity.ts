@@ -32,6 +32,9 @@ export class User extends CoreEntity {
   @Column({ default: false })
   verified: boolean;
 
+  @Column()
+  expire: Date;
+
   @Column({ default: false })
   isAdmin: boolean;
 

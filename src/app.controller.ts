@@ -3,7 +3,7 @@ import { Body, Controller, Get, Post, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateAccountInput, CreateAccountOutput } from './users/dto/create-account.dto';
 
-@Controller()
+@Controller("/")
 export class AppController {
   constructor(
     private readonly appService: AppService,

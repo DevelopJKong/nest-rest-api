@@ -1,3 +1,4 @@
+import { Session } from './users/entity/session.entity';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
@@ -8,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entity/user.entity';
 import { CommonModule } from './common/common.module';
 // import { ServeStaticModule } from '@nestjs/serve-static';
+import { MiddlewareModule } from './middleware/middleware.module';
 // import * as path from "path";
 
 @Module({
@@ -36,10 +38,12 @@ import { CommonModule } from './common/common.module';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: true,
-      entities: [User],
+      entities: [User,Session],
     }),
 
     UsersModule,
+
+    MiddlewareModule,
   ],
   controllers: [AppController],
   providers: [AppService],
