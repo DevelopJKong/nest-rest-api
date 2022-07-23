@@ -1,18 +1,20 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
+import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import * as path from "path";
+import { Module } from '@nestjs/common';
+import { UsersModule } from './users/users.module';
 import * as Joi from 'joi';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/entity/user.entity';
+import { CommonModule } from './common/common.module';
+// import { ServeStaticModule } from '@nestjs/serve-static';
+// import * as path from "path";
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: path.resolve(__dirname,"../static")
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: path.resolve(__dirname,"../static")
+    // }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.test',
@@ -34,6 +36,7 @@ import * as Joi from 'joi';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: true,
+      entities: [User],
     }),
 
     UsersModule,
